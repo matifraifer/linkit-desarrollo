@@ -1,13 +1,14 @@
 import React from "react";
+import Header from "../Header";
 import "../../componentStyles/contact.css";
 import vectorFondo from "../../images/vectorFondo.svg";
 import vector from "../../images/Vector.svg";
 import vector1 from "../../images/Vector-1.svg";
 import whatsApp from "../../images/WhatsApp.svg";
-
+import USA from "../../images/banderaUsa.png";
+import ARG from "../../images/banderaArg.png";
 import { postContactoAirtable } from "../../functions/postContactoAirtable";
 import ReCAPTCHA from "react-google-recaptcha";
-import HeaderENG from "./HeaderENG";
 
 export default function ContactoENG() {
   const [nombre, setNombre] = React.useState("");
@@ -17,6 +18,7 @@ export default function ContactoENG() {
   const [condicionesLegales, setCondicionesLegales] = React.useState("");
   const [errors, setErrors] = React.useState({});
   const [captcha, setCaptcha] = React.useState("");
+  
 
   function validate(input, event) {
     console.log("input", input);
@@ -81,7 +83,7 @@ export default function ContactoENG() {
   
   return (
     <div className="contacto">
-      <HeaderENG />
+      <Header />
       <div className="background">
         <img alt="" className="img_back1" src={vectorFondo} />
         <img alt="" className="img_back2" src={vectorFondo} />
@@ -92,7 +94,7 @@ export default function ContactoENG() {
       </div>
 
       <form onSubmit={(e) => handleSubmit(e)}>
-        <div className="inputs-contact">
+        <div className="inputs">
           <h3>Name*</h3>
           {errors.nombre ? <p className="alertaForm">{errors.nombre}</p> : null}
           <input
@@ -182,11 +184,13 @@ export default function ContactoENG() {
           <a href="/faqs">
             <p className="footer-button">FAQS</p>
           </a>
-          <div className="contenedor-idiomas-faqs">
+          <div className="contenedor-idiomas">
             <a href="/homeENG" className="contenedor-bandera">
-              <div className="idioma-component">ENG |</div>
+              <img className="emojiBandera" src={USA} alt="" />
+              <div className="idioma-component">ENG</div>
             </a>
             <a className="contenedor-bandera" href="/home">
+              <img className="emojiBandera" src={ARG} alt="" />
               <div className="idioma-component">ESP</div>
             </a>
           </div>

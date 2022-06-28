@@ -4,9 +4,6 @@ body{
     flex-direction: column;
     font-family: 'Manrope', sans-serif;
 }
-h3{
-  color: #63799e;
-}
 .contenedor-cuestion{
   display: flex;
   flex-direction: column;

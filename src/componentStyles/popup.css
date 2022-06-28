@@ -4,6 +4,9 @@
   box-sizing: border-box;
   overflow-x: visible;
 }
+.imgBack{
+  width: 40px;
+}
 .text{
   text-align: left;
 }
@@ -209,6 +212,11 @@ div.header-popup{
 .popup .file input {
   display: none;
 }
+.popup .file {
+  display: flex;  
+  flex-direction: row;
+  align-items: center;
+}
 .popup .file label {
   cursor: pointer;
   text-align: center;
@@ -343,5 +351,6 @@ div.header-popup{
   .popup .apply {
     width: 20%;
   }
+  
 }
 

@@ -172,7 +172,7 @@ export default function Empresas() {
             </div>
             <div className="buttons3">
               <button className="puestos-gradiente">
-                <p>Machine Learning</p>
+                <p>Machine learning</p>
               </button>
               <button className="puestos-gradiente">
                 <p>Blockchain</p>
@@ -350,7 +350,7 @@ export default function Empresas() {
                   onChange={(opt) => setInteresadoEnRoles(opt)}
                 />
               </div>
-              <h3>Otro stak</h3>
+              <h3>Otro stack</h3>
               <input
                 className="inp"
                 type="textarea"

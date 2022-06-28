@@ -25,11 +25,14 @@ import ARG from "../../images/banderaArg.png"
 import ReCAPTCHA from "react-google-recaptcha";
 import { Link } from "react-router-dom";
 import HeaderENG from "./HeaderENG";
-
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import { ThreeDots } from "react-loader-spinner";
+import { Checkmark } from "react-checkmark";
 import { postFormAirtableCandidatos } from "../../functions/postCandidatosAirtable";
 import { valuesExperience, valuesSelectRoles } from "../../constants/selects";
 import { valuesSelectComoNosConociste } from "../../constants/selects";
 import { valuesSelectTecnologias } from "../../constants/selects";
+
 export default function Candidatoseng() {
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
@@ -54,8 +57,12 @@ export default function Candidatoseng() {
   //const [menu, setMenu] = useState(false);
   const [popup, setPopup] = useState(false);
   const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [greenTick, setGreenTick] = useState(false);
 
   function validate(input, event) {
+
+    
     let errorsObj = {};
     let contadorErrores = 0;
     if (input.nombre === "") {
@@ -86,6 +93,10 @@ export default function Candidatoseng() {
       errorsObj.captcha = "El captcha es requerido";
       contadorErrores++;
     }
+    if (isLoading && greenTick === false) {
+      errorsObj.isLoading = "El formulario se está enviando";
+      contadorErrores++;
+    }
     if (contadorErrores === 0) {
       console.log("no hay errores");
       postFormAirtableCandidatos(
@@ -112,6 +123,7 @@ export default function Candidatoseng() {
       event.preventDefault();
     }
   }
+
 
   function convertirArray(array) {
     let arrayConvertido = [];
@@ -150,7 +162,9 @@ export default function Candidatoseng() {
     validate(objetoAVerificar, event);
   }
 
+ 
   function guardarArchivo(e) {
+    setIsLoading(true);
     var file = e.target.files[0]; //the file
     setFileName(file.name);
     var reader = new FileReader(); //this for convert to Base64
@@ -175,11 +189,12 @@ export default function Candidatoseng() {
             filename: file.name,
           };
           setGoogleObject(object);
+          setIsLoading(false);
+          setGreenTick(true);
         })
         .catch((e) => console.log(e)); // Or Error in console
     };
   }
-
 
   function onChangeCaptcha(value) {
     setCaptcha(value);
@@ -247,6 +262,7 @@ export default function Candidatoseng() {
           </h1>
         </div>
         <h2 id="offers">Available offers</h2>
+        <div className="contOF">
         <div className="buttons buttons-desktop scrollbox">
           <div className="candidate-buttons">
           {ofertas.length > 0 ? (
@@ -280,6 +296,7 @@ export default function Candidatoseng() {
               <h1>Cargando ofertas...</h1>
             )}
           </div>
+        </div>
         </div>
         <h2 id="technologies">In these technologies</h2>
         <div className="images">
@@ -328,21 +345,21 @@ export default function Candidatoseng() {
             {errors.nombre ? (
               <p className="alertaForm">{errors.nombre}</p>
             ) : null}
-            <input placeholder="Name"  type="text" onChange={(e) => setNombre(e.target.value)} />
+            <input id="ppr" placeholder="Name"  type="text" onChange={(e) => setNombre(e.target.value)} />
 
             <h3>Email*</h3>
             {errors.email ? <p className="alertaForm">{errors.email}</p> : null}
-            <input placeholder=" Email" type="email" onChange={(e) => setEmail(e.target.value)} />
+            <input id="ppr" placeholder=" Email" type="email" onChange={(e) => setEmail(e.target.value)} />
             <h3>Address*</h3>
             {errors.direccion ? (
               <p className="alertaForm">{errors.direccion}</p>
             ) : null}
-            <input placeholder="Address" type="text" onChange={(e) => setDireccion(e.target.value)} />
+            <input id="ppr" placeholder="Address" type="text" onChange={(e) => setDireccion(e.target.value)} />
             <h3>LinkedIn*</h3>
             {errors.linkedin ? (
               <p className="alertaForm">{errors.linkedin}</p>
             ) : null}
-            <input placeholder="*Linkedin" type="text" onChange={(e) => setLinkedIn(e.target.value)} />
+            <input id="ppr" placeholder="*Linkedin" type="text" onChange={(e) => setLinkedIn(e.target.value)} />
             <h3>Experience</h3>
             <Select
                   placeholder="Experience"
@@ -352,15 +369,36 @@ export default function Candidatoseng() {
                 />
           </div>
           <div className="details">
-            <h3>Upload your CV</h3>
+            <h3 className="parcheMargin">Upload your CV </h3>
             <div className="file">
-              <label form="archive">
+              <label form="archive" className="addCV">
                 +
-                <input type="file" id="archive" onChange={(e) => guardarArchivo(e)}/>
+                <input
+                  type="file"
+                  id="archive"
+                  onChange={(e) => guardarArchivo(e)}
+                />
               </label>
+              {isLoading ? (
+                <div style={{ paddingLeft: 10 }}>
+                  <ThreeDots
+                    height="50"
+                    width="50"
+                    ariaLabel="loading"
+                    color="blue"
+                  />
+                </div>
+              ) : null}
+              {greenTick ? <Checkmark size="medium" /> : null}
             </div>
-            {fileName}<br></br>
-            <h3>Intended remuneration</h3>
+            {errors.isLoading ? (
+              <p className="alertaForm">{errors.isLoading}</p>
+            ) : null}
+            
+            {fileName}
+            <br></br>
+
+            <h3 className="pH3">Intended remuneration</h3>
             <div className="value">
               <select
                 className="fondo-blanco"
@@ -376,7 +414,7 @@ export default function Candidatoseng() {
                 onChange={(e) => setRemuneracionPretendida(e.target.value)}
               />
             </div>
-            <h3>Interested in roles</h3>
+            <h3 className="pH3Int">Interested in roles</h3>
 
             <Select placeholder="Choose the role(s)"
               className="selectCandidatos"
@@ -384,15 +422,16 @@ export default function Candidatoseng() {
               isMulti
               onChange={(opt) => setInteresadoEnRoles(opt)}
             />
-            <h3>Otros</h3>
+            <h3 className="pH3">Others</h3>
           <input 
+          id="ppr"
             className="inp"
             type="textarea"
             placeholder="Others..."
 
             
           />
-            <h3>How did you meet us</h3>
+            <h3 className="pH3">How did you meet us</h3>
             <Select  placeholder="How did you meet us"
               className="selectCandidatos"
               options={valuesSelectComoNosConociste}
@@ -400,7 +439,7 @@ export default function Candidatoseng() {
               onChange={(opt) => setComoNosConociste(opt)}
             />
 
-            <h3>Technologies</h3>
+            <h3 className="pH3">Technologies</h3>
 
             <Select placeholder="Choose the technology(s)"
               className="selectCandidatos"

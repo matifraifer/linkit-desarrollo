@@ -190,30 +190,29 @@ export default function PopupFijo(props) {
       </div>
       <h2 className="designer">{data.Nombre}</h2>
 
-      <h3 className="color1">Description</h3>
+      <h3 className="color1">Descripción</h3>
       <div>
         <p className="text">{data.Descripcion}</p>
 
-    
         <h3 className="location color1">
-          Location:{" "}
+          Ubicación:{" "}
           <p className="negro">
             {data.ModalidadDeTrabajo}, {data.Ubicacion}
           </p>
         </h3>
         <div></div>
         <div>
-          <h3 className="color1">About the client:</h3>
+          <h3 className="color1">Sobre el cliente:</h3>
           <p>{data.SobreElCliente}</p>
         </div>
         <div>
-          <h3 className="color1">Day-to-Day Responsibilities:</h3>
+          <h3 className="color1">Responsabilidades:</h3>
           <p>{data.Responsabilidades}</p>
         </div>
       </div>
       <form onSubmit={(e) => handleSubmit(e)}>
         <div className="inputs">
-          <h3>Name</h3>
+          <h3>Nombre</h3>
           {errors.nombre ? <p className="alertaForm">{errors.nombre}</p> : null}
           <input
             placeholder="Nombre"
@@ -227,7 +226,7 @@ export default function PopupFijo(props) {
             type="email"
             onChange={(e) => setEmail(e.target.value)}
           />
-          <h3>Address</h3>
+          <h3>Dirección</h3>
           {errors.direccion ? (
             <p className="alertaForm">{errors.direccion}</p>
           ) : null}
@@ -245,7 +244,7 @@ export default function PopupFijo(props) {
             type="text"
             onChange={(e) => setLinkedIn(e.target.value)}
           />
-          <h3>Experience</h3>
+          <h3>Experiencia</h3>
           <Select
             placeholder="Experiencia"
             className="selectCandidatos"
@@ -254,7 +253,7 @@ export default function PopupFijo(props) {
           />
         </div>
         <div className="details">
-          <h3>Upload your CV</h3>
+          <h3>Carga tu CV</h3>
           <div className="file">
             <label form="archive">
               +
@@ -286,17 +285,17 @@ export default function PopupFijo(props) {
           {fileName}
           <br></br>
 
-          <h3>Currency</h3>
+          <h3>Moneda</h3>
           <select
             className="fondo-blanco"
             name="value"
             onChange={(e) => setMonedaRemuneracion(e.target.value)}
           >
-            <option value="0">Choose</option>
+            <option value="0">Elegir</option>
             <option value="ARS">ARS</option>
             <option value="USD">USD</option>
           </select>
-          <h3>Desired Remuneration</h3>
+          <h3>Remuneracion Pretendida</h3>
           <input
             placeholder="Remuneracion pretendida"
             className="remuneracion"
@@ -304,7 +303,7 @@ export default function PopupFijo(props) {
             onChange={(e) => setRemuneracionPretendida(e.target.value)}
           />
 
-          <h3>How did you meet us</h3>
+          <h3>Cómo nos conociste</h3>
 
           <Select
             className="xd"
@@ -313,7 +312,7 @@ export default function PopupFijo(props) {
             onChange={(opt) => setComoNosConociste(opt)}
           />
 
-          <h3>Technologies</h3>
+          <h3>Tecnologías</h3>
           <Select
             className="xd"
             options={valuesSelectTecnologias}
@@ -335,13 +334,13 @@ export default function PopupFijo(props) {
                 className="terms"
                 onClick={(e) => setCondicionesLegales(e.target.value)}
               />
-              <h3>Accept legal conditions</h3>
+              <h3>Aceptar condiciones legales</h3>
             </div>
             {errors.condicionesLegales ? (
               <p className="alertaForm">{errors.condicionesLegales}</p>
             ) : null}
             <button type="submit" className="send-button">
-              Send
+              Enviar
             </button>
           </div>
         </div>

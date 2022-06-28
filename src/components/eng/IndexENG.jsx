@@ -73,10 +73,9 @@ export default function IndexENG() {
               <a className="contenedor-bandera" href="/home">
                 <div className="idioma-component">ESP</div>
               </a>
-              </div>
-                <a href="/contactoENG">
-                        <button className="contact-button">CONTACT</button>
-                </a>
+            </div>
+                        <button className="contact-button" onClick={() => setModalContacto(true)}>CONTACT</button>
+                    {modalContacto && <ModalContactoENG setModalContacto={setModalContacto} />}
                 </div>
 
             </div>
@@ -92,7 +91,7 @@ export default function IndexENG() {
             <div className ="contenedor_main" >
                 <div className="contenedorText_main">
                     <div className="atention_main">We Are Hiring!</div>
-                    <div className="preg_main">Are you looking for <span>top IT recruitment </span> services in the tech industry world?</div>
+                    <div className="preg_main">Are you looking for <span>top talent selection </span> services in the tech industry world?</div>
                     <div className="service_main">At Linkit, both companies looking for new trained employees, as well as candidates who want to grow professionally</div>
                     <a href="#section" className="bMasInfo" id="colorBlanco">
                         More Information
@@ -162,23 +161,21 @@ export default function IndexENG() {
                 <ol>
                     <li>
                         <div className="titulos">Intro-meeting</div>
-                        <span className="subt">We understand your hard, soft and cultural needs to match your requirements.</span>
+                        <p id="subt">We understand your hard, soft and cultural needs to match your requirements.</p>
                     </li>
                     <li>
                         <div className="titulos">Technical alignment</div>
-                        <span className="subt">Meet our tech-recruiters to define tech-stack, tools, time-zone, and definte recruitment strategy.</span>
+                        <p id="subt">Meet our tech-recruiters to define tech-stack, tools, time-zone, and definte recruitment strategy.</p>
                     </li>
                     <li>
-                        <div className="titulos">
-                        Sourcing and vetting.
-                        </div>
-                        <span className="subt">We start the recruitment process by vetting the entire market and proceed with initial interviews.</span></li>
+                    <div className="titulos">Sourcing and vetting.</div>
+                        <p id="subt">We start the recruitment process by vetting the entire market and proceed with initial interviews.</p></li>
                     <li>
-                        <div className="titulos">Candidate presentation</div>
-                        <span className="subt">We will introduce you the top 3 candidates so you can chose the best talent for your team.</span></li>
+                        <div className="titulos">Candidate presentation.</div>
+                        <p id="subt">We will introduce you the top 3 candidates so you can chose the best talent for your team.</p></li>
                     <li>
                         <div className="titulos">Hiring and on-boarding.</div>
-                        <span className="subt">We will guide you through the offer and provide you warranty for the complete probation period.</span></li>
+                        <p id="subt">We will guide you thorught the offer and provide you warranty for the complete probation period.</p></li>
                 </ol>
             </div>
         </div>

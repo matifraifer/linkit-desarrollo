@@ -180,12 +180,9 @@ const cambiarEstilo10 = () => {
                 <p className="preguntaDropdown">¿Qué modalidades de contratación se trabajan?</p>
                 <p className={pregunta9}>Gracias a los partners que tenemos con distintas empresas del mundo, podemos alinear los requisitos legales del país donde radique la empresa, así como donde esté el talento.
 Los tipos de relaciones laborales más frecuentes pueden ser:
-<ul>
-    <li>Como trabajador autónomo/ modalidad freelance</li>
-    <li>Mediante un contrato temporal</li>
-    <li>En relación de dependencia</li>
-</ul>
- </p>
+ + Como trabajador autónomo/ modalidad freelance
+ + Mediante un contrato temporal
+ + En relación de dependencia</p>
             </button>
         </div>
 
@@ -203,7 +200,6 @@ Los tipos de relaciones laborales más frecuentes pueden ser:
         <div className="footer">
             <h4>Link<span>IT</span></h4>
         </div>
-    
         <div className="info-footer">
             <a href="./home" className="footer-button">
                 <p className="options">INICIO</p>

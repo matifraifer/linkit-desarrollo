@@ -311,13 +311,14 @@ export default function Empresas() {
                   onChange={(opt) => setInteresadoEnRoles(opt)}
                 />
               </div>
+              <h3>Other stak</h3>
               <input
                 className="inp"
                 type="textarea"
                 placeholder="Others..."
                 onChange={(e) => setInteresadoEnOtrosRoles(e.target.value)}
               />
-              <h3>How did you meet us</h3>
+              <h3 className="tituloInputs">How did you meet us</h3>
               <Select
                 placeholder="Choose how you met us"
                 className="xd"

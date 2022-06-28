@@ -23,10 +23,11 @@ import whatsApp from "../images/WhatsApp.svg";
 //import menuHambNegro from "../images/menuHamburguesa.svg";
 //import MenuHamburguesa from "./MenuHamburguesa";
 import Header from "./Header";
-
+import { Checkmark } from "react-checkmark";
 import { postFormAirtableCandidatos } from "../functions/postCandidatosAirtable";
 import ReCAPTCHA from "react-google-recaptcha";
-import Popup from "./Popup";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import { ThreeDots } from "react-loader-spinner";
 
 import { valuesExperience, valuesSelectRoles } from "../constants/selects";
 import { valuesSelectComoNosConociste } from "../constants/selects";
@@ -49,15 +50,13 @@ export default function Candidatos() {
   const [condicionesLegales, setCondicionesLegales] = useState("");
   const [ofertas, setOfertas] = useState({});
   const [data, setData] = useState("");
-
   const [captcha, setCaptcha] = useState("");
-
   const [googleObject, setGoogleObject] = useState({});
   const [fileName, setFileName] = useState("");
-
   //const [menu, setMenu] = useState(false);
-  const [popup, setPopup] = useState(false);
   const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [greenTick, setGreenTick] = useState(false);
 
   function validate(input, event) {
     let errorsObj = {};
@@ -90,6 +89,11 @@ export default function Candidatos() {
       errorsObj.captcha = "El captcha es requerido";
       contadorErrores++;
     }
+    if (isLoading && greenTick === false) {
+      errorsObj.isLoading = "El formulario se está enviando";
+      contadorErrores++;
+    }
+
     if (contadorErrores === 0) {
       console.log("no hay errores");
       postFormAirtableCandidatos(
@@ -154,6 +158,7 @@ export default function Candidatos() {
   }
 
   function guardarArchivo(e) {
+    setIsLoading(true);
     var file = e.target.files[0]; //the file
     setFileName(file.name);
     var reader = new FileReader(); //this for convert to Base64
@@ -178,11 +183,12 @@ export default function Candidatos() {
             filename: file.name,
           };
           setGoogleObject(object);
+          setIsLoading(false);
+          setGreenTick(true);
         })
         .catch((e) => console.log(e)); // Or Error in console
     };
   }
-
 
   function onChangeCaptcha(value) {
     setCaptcha(value);
@@ -200,10 +206,9 @@ export default function Candidatos() {
         .catch((error) => {
           console.log(error);
         });
-    } catch (err){
-      console.log(err)
+    } catch (err) {
+      console.log(err);
     }
-   
   }, []);
 
   return (
@@ -231,7 +236,7 @@ export default function Candidatos() {
         </ul>
       </nav>
       <main>
-        <h4 className="puestos"></h4>
+        <h4 className="puestos">ROLES ABIERTOS</h4>
 
         <div className="h1">
           <h1 className="question">
@@ -239,13 +244,16 @@ export default function Candidatos() {
           </h1>
         </div>
         <h2 id="offers">Ofertas disponibles</h2>
-        <div className="buttons buttons-desktop scrollbox">
-          <div className="candidate-buttons" id="parche">
+        <div className="contOF">
+
+        
+        <div id="alineacion" className="buttons buttons-desktop scrollbox">
+          <div id="ancho" className="candidate-buttons" id="parche">
             {ofertas.length > 0 ? (
               ofertas.map((oferta) => (
-                <a className="link-pupup" key={oferta.fields.Codigo}>
+                <a id="ancho" className="link-pupup" key={oferta.fields.Codigo}>
                   <Link
-                    to={`/popup/${oferta.fields.Codigo}`}
+                    to={`/popupESP/${oferta.fields.Codigo}`}
                     state={oferta.fields}
                   >
                     <p onClick={() => setData(oferta.fields)}>
@@ -272,7 +280,7 @@ export default function Candidatos() {
               <h1>Cargando ofertas...</h1>
             )}
           </div>
-          {popup ? <Popup data={data} /> : null}
+        </div>
         </div>
         <h2 id="technologies">En estas tecnologías</h2>
         <div className="images">
@@ -359,6 +367,7 @@ export default function Candidatos() {
               <p className="alertaForm">{errors.nombre}</p>
             ) : null}
             <input
+              id="ppr"
               placeholder=" Nombre"
               type="text"
               onChange={(e) => setNombre(e.target.value)}
@@ -367,6 +376,7 @@ export default function Candidatos() {
             <h3>Email*</h3>
             {errors.email ? <p className="alertaForm">{errors.email}</p> : null}
             <input
+            id="ppr"
               placeholder=" Email"
               type="email"
               onChange={(e) => setEmail(e.target.value)}
@@ -377,6 +387,7 @@ export default function Candidatos() {
             ) : null}
 
             <input
+            id="ppr"
               placeholder=" Dirección"
               type="text"
               onChange={(e) => setDireccion(e.target.value)}
@@ -387,23 +398,23 @@ export default function Candidatos() {
               <p className="alertaForm">{errors.linkedin}</p>
             ) : null}
             <input
+            id="ppr"
               placeholder="*Linkedin"
               type="text"
               onChange={(e) => setLinkedIn(e.target.value)}
             />
             <h3>Experiencia</h3>
             <Select
-                  placeholder="Experiencia"
-                  className="selectCandidatos"
-                  options={valuesExperience}
-                  onChange={(opt) => setExperiencia(opt)}
-                />
-
+              placeholder="Experiencia"
+              className="selectCandidatos"
+              options={valuesExperience}
+              onChange={(opt) => setExperiencia(opt)}
+            />
           </div>
           <div className="details">
-            <h3>Carga tu CV </h3>
+            <h3 className="parcheMargin">Carga tu CV </h3>
             <div className="file">
-              <label form="archive">
+              <label form="archive" className="addCV">
                 +
                 <input
                   type="file"
@@ -411,11 +422,26 @@ export default function Candidatos() {
                   onChange={(e) => guardarArchivo(e)}
                 />
               </label>
+              {isLoading ? (
+                <div style={{ paddingLeft: 10 }}>
+                  <ThreeDots
+                    height="50"
+                    width="50"
+                    ariaLabel="loading"
+                    color="blue"
+                  />
+                </div>
+              ) : null}
+              {greenTick ? <Checkmark size="medium" /> : null}
             </div>
+            {errors.isLoading ? (
+              <p className="alertaForm">{errors.isLoading}</p>
+            ) : null}
 
-            {fileName}<br></br>
+            {fileName}
+            <br></br>
 
-            <h3>Remuneracion pretendida</h3>
+            <h3 className="pH3">Remuneracion pretendida</h3>
             <div className="value">
               <select
                 className="fondo-blanco"
@@ -432,7 +458,7 @@ export default function Candidatos() {
                 onChange={(e) => setRemuneracionPretendida(e.target.value)}
               />
             </div>
-            <h3>Interesado en roles</h3>
+            <h3 className="pH3Int">Interesado en roles</h3>
             <Select
               placeholder="Elige lo/s rol/es"
               className="selectCandidatos"
@@ -440,9 +466,9 @@ export default function Candidatos() {
               isMulti
               onChange={(opt) => setInteresadoEnRoles(opt)}
             />
-            <h3>Otros</h3>
+            <h3 className="pH3">Otros</h3>
             <input className="inp" type="textarea" placeholder="Otros..." />
-            <h3>Cómo nos conociste</h3>
+            <h3 className="pH3">Cómo nos conociste</h3>
             <Select
               placeholder="Cómo nos conociste"
               className="selectCandidatos"
@@ -450,7 +476,7 @@ export default function Candidatos() {
               isMulti
               onChange={(opt) => setComoNosConociste(opt)}
             />
-            <h3>Tecnologías</h3>
+            <h3 className="pH3">Tecnologías</h3>
             <Select
               placeholder="Elige la/s tecnología/s"
               className="selectCandidatos"
@@ -459,8 +485,13 @@ export default function Candidatos() {
               onChange={(opt) => setTecnologias(opt)}
             />
 
-            <ReCAPTCHA sitekey="6Lc2oTcgAAAAAPR8ONUY_0RU52exoKd4f45VPtmw" onChange={onChangeCaptcha} />
-            {errors.captcha ? <p className="alertaForm">{errors.captcha}</p> : null}
+            <ReCAPTCHA
+              sitekey="6Lc2oTcgAAAAAPR8ONUY_0RU52exoKd4f45VPtmw"
+              onChange={onChangeCaptcha}
+            />
+            {errors.captcha ? (
+              <p className="alertaForm">{errors.captcha}</p>
+            ) : null}
 
             <div className="condition">
               <div className="acept-conditions">
@@ -504,7 +535,6 @@ export default function Candidatos() {
               href="https://wa.me/+5491165287429"
               target="_blank"
             >
-
               <img alt="" src={whatsApp} />
             </a>
           </div>

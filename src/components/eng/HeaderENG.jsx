@@ -53,7 +53,7 @@ export default function HeaderENG() {
               </a>
             </div>
             <button type="submit" className="contact-button-component" >
-              <a href="/contactoENG" id="coso">
+              <a href="/contactoENG">
               CONTACT
               </a>
             </button>

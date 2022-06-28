@@ -16,6 +16,8 @@ import contrato from "../images/contrato.png"
 import cliente1 from "../images/cliente1.png"
 import cliente2 from "../images/cliente2.png"
 import cliente3 from "../images/cliente3.png"
+import cliente4 from "../images/cliente4.png"
+import cliente5 from "../images/cliente5.png"
 
 
 import "../componentStyles/home.css";
@@ -188,14 +190,15 @@ export default function Index() {
         </div>
     <section className="contenedor_confianza">
         <div className="cardClientes_confianza" >
-            <a href="" className="card_clientes" target="_blank" rel="noopener noreferrer">
+            <div className="contenedorScroll">
+            <div href="" className="card_clientes" target="_blank" rel="noopener noreferrer">
 
                 <div className="ContenedorNombreUser_clientes">
                     <img src={cliente1} alt="" width="100px"/>
                 </div>
                 <p className="testimonio">"La sinergia con LinkIT como partner fue inmediata, al cabo de 2 semanas ya teníamos perfiles cualificados y listos para ser entrevistados por nosotros, sin duda seguiremos confiando en ellos".</p>
-            </a>
-            <a href="" className="card_clientes" target="_blank" rel="noopener noreferrer">
+            </div>
+            <div href="" className="card_clientes" target="_blank" rel="noopener noreferrer">
 
                 <div className="ContenedorNombreUser_clientes">
                     <img src={cliente2} alt="" width="80px"/>
@@ -204,15 +207,34 @@ export default function Index() {
                     </div>
                 </div>
                 <p className="testimonio">"La velocidad y el profesionalismo con el que estamos trabajando junto a LinkIT es lo que nos permite confiar en ellos y seguir apostando por crecer, los partners a la hora de escalar son inflatables sin duda aquí encontramos a uno"</p>
-            </a>
+            </div>
 
-            <a href="" className="card_clientes" target="_blank" rel="noopener noreferrer">
+            <div href="" className="card_clientes" target="_blank" rel="noopener noreferrer">
 
                 <div className="ContenedorNombreUser_clientes">
                     <img src={cliente3} alt="" width="100px"  />
                 </div>
                 <p className="testimonio">"En el mundo crypto es necesario tener conocimiento de todas las partes que lo conforman, conseguir perfiles en tecnologías como solidity no es sencillo, LinkIT ha demostrado conocer en profundidad las aptitudes y cualidades técnicas que los talentos necesitan"</p>
-            </a>
+            </div>
+
+            <div href="" className="card_clientes" target="_blank" rel="noopener noreferrer">
+
+                <div className="ContenedorNombreUser_clientes">
+                    <img src={cliente4} alt="" width="100px"  />
+                </div>
+                <p className="testimonio">"Hemos estado trabajando con LinkIT los últimos meses con una comunicación fluida, confianza, transparencia y obteniendo muy buenos resultados"</p>
+            </div>
+            
+            <div href="" className="card_clientes" target="_blank" rel="noopener noreferrer">
+
+                <div className="ContenedorNombreUser_clientes5">
+                    <img src={cliente5} alt="" width="80px"  />
+                </div>
+                <p className="testimonio">"Sin lugar a dudas fue lo que nos ayudó a componer el equipo ideal para dar un salto de calidad"</p>
+            </div>
+            
+            </div>
+
         </div>
     </section>
 

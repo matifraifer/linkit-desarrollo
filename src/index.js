@@ -12,7 +12,7 @@ import FAQs from "./components/FAQs";
 import Header from "./components/Header"
 import Contacto from "./components/Contacto";
 import Index from "./components/Index"
-
+import PopupFijoESP from "./components/PopupFijoESP"
 import PopupFijo from "./components/PopupFijo";
 import IndexENG from "./components/eng/IndexENG";
 import EmpresasENG from "./components/eng/Empresaseng";
@@ -32,6 +32,7 @@ ReactDOM.render(
         <Route exact path="/candidatoseng" element={<Candidatoseng/>}/>
         <Route exact path="/empresas" element={<Empresas/>}/> 
         <Route exact path="/popup/:id" element={<PopupFijo/>}/>
+        <Route exact path="/popupESP/:id" element={<PopupFijoESP/>}/>
         <Route exact path="/faqs" element={<FAQs/>}/>
         <Route exact path="/faqsENG" element={<FAQsENG/>}/>
         <Route exact path="/header" element={<Header/>}/>
@@ -40,6 +41,7 @@ ReactDOM.render(
         <Route exact path="/modal" element={<MenuHamburguesa/>}/>
         <Route exact path="/empresasENG" element={<EmpresasENG/>}/>
         <Route exact path="/contactoENG" element={<ContactoENG/>}/>
+        
       </Routes>
     </Fragment>
   </Router>,
